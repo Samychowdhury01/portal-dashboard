@@ -1,9 +1,10 @@
-
-
-const Input = ({ type, placeholder, register, name, label }) => {
+const Input = ({ type, placeholder, register, name, label, error }) => {
   return (
     <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={name}>
+      <label
+        className="block text-gray-700 text-sm font-bold mb-2"
+        htmlFor={name}
+      >
         {label}
       </label>
       <input
@@ -13,6 +14,9 @@ const Input = ({ type, placeholder, register, name, label }) => {
         placeholder={placeholder}
         {...register(name, { required: true })}
       />
+       {error && (
+        <p className="text-red-500 text-xs mt-1">Something went wrong! try again.</p>
+      )}
     </div>
   );
 };

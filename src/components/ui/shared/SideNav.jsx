@@ -35,12 +35,13 @@ const SideNav = () => {
           <ul className="p-2 bg-slate-50 rounded-lg">
             <li>
               <ActiveLink to="/add-user">
-                <HiOutlineUserAdd /> Departments
+                <HiOutlineUsers /> Departments
               </ActiveLink>
             </li>
             <li>
               <ActiveLink to="/users">
-                <HiOutlineUsers /> Create Department
+                <HiOutlineUserAdd />
+                Create Department
               </ActiveLink>
             </li>
           </ul>
@@ -53,13 +54,14 @@ const SideNav = () => {
           <ul className="p-2 bg-slate-50 rounded-lg">
             <li>
               <ActiveLink to="/add-user">
-                <HiOutlineUserAdd />
+                <HiOutlineUsers />
                 Employees
               </ActiveLink>
             </li>
             <li>
               <ActiveLink to="/users">
-                <HiOutlineUsers /> Add Employee
+                <HiOutlineUserAdd />
+                Add Employee
               </ActiveLink>
             </li>
           </ul>
@@ -72,7 +74,7 @@ const SideNav = () => {
   );
   return (
     <>
-      <div className="lg:w-full bg-slate-100 lg:h-full drop-shadow-lg rounded-md lg:overflow-y-auto">
+      <div className="lg:w-full bg-slate-100 lg:h-[800px] drop-shadow-lg rounded-md lg:overflow-y-hidden">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
