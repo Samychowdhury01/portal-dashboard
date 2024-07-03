@@ -6,6 +6,9 @@ import AllUser from "../pages/User/AllUser";
 import InviteUser from "../pages/User/InviteUser";
 import AddDepartment from "../pages/Department/AddDepartment";
 import Departments from "../pages/Department/Departments";
+import Employees from "../pages/Employees/Employees";
+import CreateEmployee from "../pages/Employees/CreateEmployee";
+
 
 const router = createBrowserRouter([
     {
@@ -35,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "/departments",
         element: <Departments/>
+      },
+      {
+        path: "/add-employee",
+        element: <CreateEmployee/>
+      },
+      {
+        path: "/employees",
+        element: <Employees/>
       },
     ]
     },
