@@ -5,22 +5,22 @@ import { MdEmail } from "react-icons/md";
 const TopNav = () => {
     const navItems = <>
     <li>
-              <ActiveLink>
+              <ActiveLink to="/">
                 <HiHome className="text-2xl" />
               </ActiveLink>
             </li>
             <li>
-              <ActiveLink>
+              <ActiveLink to="/--">
                 <HiBell className="text-2xl" />
               </ActiveLink>
             </li>
             <li>
-              <ActiveLink>
+              <ActiveLink to="/--">
                 <HiClipboardCheck className="text-2xl" />
               </ActiveLink>
             </li>
             <li>
-              <ActiveLink>
+              <ActiveLink to="/--">
                 <MdEmail className="text-2xl" />
               </ActiveLink>
             </li>
@@ -30,7 +30,7 @@ const TopNav = () => {
     </>
   return (
     <>
-      <div className="lg:navbar bg-primary bg-opacity-20 shadow-lg rounded-md mb-5">
+      <div className="lg:navbar bg-primary bg-opacity-15 shadow-lg rounded-md mb-5">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

@@ -11,7 +11,7 @@ const SideNav = () => {
           <summary className="p-2 text-base">User Management</summary>
           <ul className="p-2 bg-slate-50 rounded-lg">
             <li>
-              <ActiveLink to="/">
+              <ActiveLink to="/add-user">
                 <HiOutlineUserAdd /> Add User
               </ActiveLink>
             </li>
@@ -72,7 +72,7 @@ const SideNav = () => {
   );
   return (
     <>
-      <div className="lg:w-full bg-slate-100 max-h-screen drop-shadow-lg rounded-md">
+      <div className="lg:w-full bg-slate-100 lg:h-full drop-shadow-lg rounded-md lg:overflow-y-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
