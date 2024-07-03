@@ -42,12 +42,12 @@ const SideNav = () => {
           </summary>
           <ul className="p-2 bg-slate-50 rounded-lg z-50">
             <li>
-              <ActiveLink to="/add-user">
+              <ActiveLink to="/departments">
                 <IoFileTrayFullOutline /> Departments
               </ActiveLink>
             </li>
             <li>
-              <ActiveLink to="/users">
+              <ActiveLink to="/add-department">
                 <LuFileSymlink />
                 Create Department
               </ActiveLink>
@@ -62,13 +62,13 @@ const SideNav = () => {
           </summary>
           <ul className="bg-slate-50 rounded-lg z-50">
             <li>
-              <ActiveLink to="/add-user">
+              <ActiveLink to="/employees">
                 <HiOutlineUsers />
                 Employees
               </ActiveLink>
             </li>
             <li>
-              <ActiveLink to="/users">
+              <ActiveLink to="/add-employee">
                 <HiOutlineUserAdd />
                 Add Employee
               </ActiveLink>
