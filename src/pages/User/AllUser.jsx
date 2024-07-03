@@ -2,7 +2,7 @@ const AllUser = () => {
   return (
     <>
       <div className="overflow-x-auto">
-        <table className="table">
+        <table className="table relative z-0">
           {/* head */}
           <thead>
             <tr>
@@ -25,7 +25,7 @@ const AllUser = () => {
               <td>software</td>
             </tr>
             <tr>
-              <th>1</th>
+              <th>2</th>
               <td>Samy Chowdhury</td>
               <td>Backend Developer</td>
               <td>samy@gmail.com</td>
@@ -33,14 +33,13 @@ const AllUser = () => {
               <td>software</td>
             </tr>
             <tr>
-              <th>1</th>
+              <th>3</th>
               <td>Samy Chowdhury</td>
               <td>Backend Developer</td>
               <td>samy@gmail.com</td>
               <td>samychowdhury</td>
               <td>software</td>
             </tr>
-           
           </tbody>
         </table>
       </div>

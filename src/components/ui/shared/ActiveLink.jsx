@@ -5,7 +5,7 @@ const ActiveLink = ({ children, to }) => {
     <NavLink
       to={to}
       className={({ isActive }) =>
-        `text-base ${isActive ? "text-primary font-medium" : ""}`
+        `text-base p-0 ${isActive ? "text-primary font-medium" : ""}`
       }
     >
       {children}

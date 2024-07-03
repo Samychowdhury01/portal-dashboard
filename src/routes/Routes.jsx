@@ -3,6 +3,7 @@ import MainLayout from "../components/layouts/MainLayout";
 import Home from "../pages/Home";
 import AddUser from "../pages/User/AddUser";
 import AllUser from "../pages/User/AllUser";
+import InviteUser from "../pages/User/InviteUser";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <AllUser/>
+      },
+      {
+        path: "/invite",
+        element: <InviteUser/>
       },
     ]
     },

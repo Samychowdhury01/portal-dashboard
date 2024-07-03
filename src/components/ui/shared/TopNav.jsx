@@ -31,7 +31,7 @@ const TopNav = () => {
   return (
     <>
       <div className="lg:navbar bg-primary bg-opacity-15 shadow-lg rounded-md mb-5">
-        <div className="navbar-start">
+        <div className="navbar-start w-full">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -56,12 +56,12 @@ const TopNav = () => {
              {navItems}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl font-bold p-0">
+          <a className="text-xl font-bold">
             <span className="text-primary">Portal</span> DashBoard
           </a>
         </div>
-        <div className="navbar-end hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+        <div className="navbar-end hidden lg:flex ">
+          <ul className="flex items-center gap-4">
             {navItems}
           </ul>
         </div>
