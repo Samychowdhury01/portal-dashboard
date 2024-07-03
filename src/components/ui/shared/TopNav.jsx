@@ -1,33 +1,45 @@
 import { HiBell, HiClipboardCheck, HiHome } from "react-icons/hi";
 import ActiveLink from "./ActiveLink";
 import { MdEmail } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const TopNav = () => {
-    const navItems = <>
-    <li>
-              <ActiveLink to="/">
-                <HiHome className="text-2xl" />
-              </ActiveLink>
-            </li>
-            <li>
-              <ActiveLink to="/--">
-                <HiBell className="text-2xl" />
-              </ActiveLink>
-            </li>
-            <li>
-              <ActiveLink to="/--">
-                <HiClipboardCheck className="text-2xl" />
-              </ActiveLink>
-            </li>
-            <li>
-              <ActiveLink to="/--">
-                <MdEmail className="text-2xl" />
-              </ActiveLink>
-            </li>
-            <div>
-          <button className="btn btn-primary text-white">Logout</button>
-        </div> 
+  const navigate = useNavigate()
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    navigate("/login")
+
+  };
+  const navItems = (
+    <>
+      <li>
+        <ActiveLink to="/">
+          <HiHome className="text-2xl" />
+        </ActiveLink>
+      </li>
+      <li>
+        <ActiveLink to="/--">
+          <HiBell className="text-2xl" />
+        </ActiveLink>
+      </li>
+      <li>
+        <ActiveLink to="/--">
+          <HiClipboardCheck className="text-2xl" />
+        </ActiveLink>
+      </li>
+      <li>
+        <ActiveLink to="/--">
+          <MdEmail className="text-2xl" />
+        </ActiveLink>
+      </li>
+      <div>
+        <button onClick={handleLogout} className="btn btn-primary text-white">
+          Logout
+        </button>
+      </div>
     </>
+  );
   return (
     <>
       <div className="lg:navbar bg-primary bg-opacity-15 shadow-lg rounded-md mb-5">
@@ -53,7 +65,7 @@ const TopNav = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 p-2 shadow"
             >
-             {navItems}
+              {navItems}
             </ul>
           </div>
           <a className="text-xl font-bold">
@@ -61,13 +73,8 @@ const TopNav = () => {
           </a>
         </div>
         <div className="navbar-end hidden lg:flex ">
-          <ul className="flex items-center gap-4">
-            {navItems}
-          </ul>
+          <ul className="flex items-center gap-4">{navItems}</ul>
         </div>
-        {/* <div className="navbar-end">
-          <button className="btn btn-primary">Logout</button>
-        </div> */}
       </div>
     </>
   );

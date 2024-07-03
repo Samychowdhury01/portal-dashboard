@@ -13,7 +13,7 @@ const AddDepartment = () => {
 
   return (
     <>
-      <>
+      
         <h3 className="text-2xl text-center font-semibold text-gray-700">
           Create Department
         </h3>
@@ -43,7 +43,7 @@ const AddDepartment = () => {
             className="btn btn-primary text-white w-full lg:w-1/6  lg:mx-auto"
           />
         </form>
-      </>
+      
     </>
   );
 };

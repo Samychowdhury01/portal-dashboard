@@ -15,7 +15,7 @@ const Input = ({ type, placeholder, register, name, label, error }) => {
         {...register(name, { required: true })}
       />
        {error && (
-        <p className="text-red-500 text-xs mt-1">Something went wrong! try again.</p>
+        <p className="text-red-500 text-xs mt-1">This Field Is Required!.</p>
       )}
     </div>
   );

@@ -13,7 +13,7 @@ const CreateEmployee = () => {
   return (
     <>
       <h3 className="text-2xl text-center font-semibold text-gray-700">
-        Add User
+        Add Employee
       </h3>
       <form
         className="flex flex-col p-4 shadow-xl rounded-lg"

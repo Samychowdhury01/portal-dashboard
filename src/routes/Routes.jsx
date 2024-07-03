@@ -8,12 +8,14 @@ import AddDepartment from "../pages/Department/AddDepartment";
 import Departments from "../pages/Department/Departments";
 import Employees from "../pages/Employees/Employees";
 import CreateEmployee from "../pages/Employees/CreateEmployee";
+import PrivateRoute from "./PrivateRoute";
+import Login from "../pages/Login/Login";
 
 
 const router = createBrowserRouter([
     {
       path: "/",
-      element: <MainLayout/>,
+      element:<PrivateRoute> <MainLayout/></PrivateRoute>,
       children: [
         {
         path: "/",
@@ -49,6 +51,10 @@ const router = createBrowserRouter([
       },
     ]
     },
+    {
+      path: "/login",
+      element: <Login/>
+    }
   ]);
 
 export default router
