@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .border-border {
+    @apply border-white; /* Example utility */
+  }
+  .bg-background {
+    @apply bg-white; /* Example utility */
+  }
+  .text-foreground {
+    @apply text-black; /* Example utility */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    font-family: "Poppins", sans-serif;
+  }
+  h1 {
+    @apply text-6xl font-semibold;
+  }
+}
+
+@layer components {
+  .btn-outline-primary {
+    @apply border-primary text-primary;
+  }
+}
