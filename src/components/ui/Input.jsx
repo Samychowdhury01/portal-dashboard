@@ -1,4 +1,5 @@
-const Input = ({ type, placeholder, register, name, label, error }) => {
+const Input = ({ type, placeholder, register, name, label, error, readOnly, defaultValue }) => {
+  console.log(defaultValue);
   return (
     <div className="mb-4">
       <label
@@ -11,6 +12,8 @@ const Input = ({ type, placeholder, register, name, label, error }) => {
         id={name}
         className="input input-bordered border-gray-300 focus:outline-none w-full"
         type={type}
+        readOnly={readOnly}
+        defaultValue= {defaultValue}
         placeholder={placeholder}
         {...register(name, { required: true })}
       />

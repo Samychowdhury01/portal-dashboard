@@ -8,10 +8,10 @@ const MainLayout = () => {
     <Container>
       <TopNav/>
       <div className="grid lg:grid-cols-12 gap-4">
-      <div className="lg:col-span-3">
+      <div className="lg:col-span-2">
       <SideNav/>
       </div>
-      <div className="lg:col-span-9">
+      <div className="lg:col-span-10">
       <Outlet />
       </div>
       </div>

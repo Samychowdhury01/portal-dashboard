@@ -10,51 +10,69 @@ import Employees from "../pages/Employees/Employees";
 import CreateEmployee from "../pages/Employees/CreateEmployee";
 import PrivateRoute from "./PrivateRoute";
 import Login from "../pages/Login/Login";
-
+import UpdateDepartment from "../pages/Department/UpdateDepartment";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element:<PrivateRoute> <MainLayout/></PrivateRoute>,
-      children: [
-        {
+  {
+    path: "/",
+    element: (
+      <PrivateRoute>
+        {" "}
+        <MainLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
         path: "/",
-        element: <Home/>
+        element: <Home />,
       },
       {
         path: "/add-user",
-        element: <AddUser/>
+        element: <AddUser />,
       },
       {
         path: "/users",
-        element: <AllUser/>
+        element: <AllUser />,
       },
       {
         path: "/invite",
-        element: <InviteUser/>
+        element: <InviteUser />,
       },
       {
         path: "/add-department",
-        element: <AddDepartment/>
+        element: <AddDepartment />,
+      },
+      {
+        path: "/update-department/:id",
+        element: <UpdateDepartment />,
+        loader: async ({ params }) => {
+          const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/departments/${params.id}`
+          );
+          if (!response.ok) {
+            throw new Error(`Failed to fetch department: ${response.status}`);
+          }
+          return response.json(); // Assuming the response is JSON data
+        },
       },
       {
         path: "/departments",
-        element: <Departments/>
+        element: <Departments />,
       },
       {
         path: "/add-employee",
-        element: <CreateEmployee/>
+        element: <CreateEmployee />,
       },
       {
         path: "/employees",
-        element: <Employees/>
+        element: <Employees />,
       },
-    ]
-    },
-    {
-      path: "/login",
-      element: <Login/>
-    }
-  ]);
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+]);
 
-export default router
+export default router;
