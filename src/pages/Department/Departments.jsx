@@ -1,30 +1,9 @@
 import Loader from "../../components/ui/shared/Loader";
 import DepartmentRow from "../../components/ui/Departments/DepartmentRow";
-import { useEffect, useState } from "react";
-import axiosInstance from "../../utils/axiosInstance";
+import useFetchData from "../../hooks/useFetchData";
 
 const Departments = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [departments, setDepartments] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await axiosInstance.get("/departments");
-        setDepartments(response.data?.data);
-        console.log(response.data?.data);
-        setIsLoading(false)
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setDepartments([]);
-        setIsLoading(false); // Optional: Handle error state if needed
-      }
-    };
-
-    fetchData();
-  }, []);
-  console.log(departments);
+  const { isLoading, data: departments, setData } = useFetchData('/departments')
   return (
     <>
       {isLoading ? (
@@ -48,7 +27,7 @@ const Departments = () => {
             <tbody>
               {departments &&
                 departments.map((department, index) => (
-                  <DepartmentRow data={department} key={index} index={index} setDepartments={setDepartments}/>
+                  <DepartmentRow data={department} key={index} index={index} setDepartments={setData}/>
                 ))}
             </tbody>
           </table>

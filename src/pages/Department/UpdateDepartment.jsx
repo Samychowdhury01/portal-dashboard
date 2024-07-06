@@ -4,11 +4,12 @@ import axiosInstance from "../../utils/axiosInstance";
 import { useState } from "react";
 import SubmitBtn from "../../components/ui/SubmitBtn";
 import { showErrorMessage, showSuccessMessage } from "../../utils/showMessages";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const UpdateDepartment = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { data } = useLoaderData();
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -23,17 +24,20 @@ const UpdateDepartment = () => {
         showSuccessMessage("You have successfully updated The Department");
         reset()
         setIsLoading(false);
+        navigate('/departments')
       }
     } catch (error) {
       if (error.response) {
         showErrorMessage(error.response.data.message);
         reset();
         setIsLoading(false);
+
       } else {
         const errorMessage = error.message || "An error occurred";
         showErrorMessage(errorMessage);
         reset();
         setIsLoading(false);
+        
       }
     }
   };

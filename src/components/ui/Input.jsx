@@ -1,5 +1,4 @@
 const Input = ({ type, placeholder, register, name, label, error, readOnly, defaultValue }) => {
-  console.log(defaultValue);
   return (
     <div className="mb-4">
       <label

@@ -17,7 +17,7 @@ const MainLayout = () => {
         >
           <SideNav isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
         </div>
-        <div className="lg:col-span-10">
+        <div className="lg:col-span-10 w-full lg:w-[1220px] mx-auto">
           <Outlet />
         </div>
       </div>
