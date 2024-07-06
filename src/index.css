@@ -37,3 +37,8 @@
     @apply btn btn-primary bg-opacity-20 text-black hover:text-white transition-all ease-in-out duration-300
   }
 }
+
+/* In your styles.css or a relevant CSS file */
+.transition-width {
+  transition: width 0.5s ease-in-out;
+}

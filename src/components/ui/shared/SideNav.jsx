@@ -1,104 +1,30 @@
-import { FaPaperPlane } from "react-icons/fa";
-import { HiOutlineUserAdd, HiOutlineUsers } from "react-icons/hi";
-import { IoFileTrayFullOutline } from "react-icons/io5";
-import { LuFileSymlink } from "react-icons/lu";
-import { CgProfile } from "react-icons/cg";
-import { MdOutlineWidgets } from "react-icons/md";
-import { TbDragDrop } from "react-icons/tb";
-import ActiveLink from "./ActiveLink";
+/* eslint-disable react/prop-types */
+// SideNav.js
+import { useState } from "react";
+import {
+  HiMenu,
+ 
+  HiOutlineX,
+} from "react-icons/hi";
 
-const SideNav = () => {
-  const menuItems = (
-    <>
-      <li>
-        <details>
-          <summary className="p-2 text-base">
-            <HiOutlineUserAdd />
-            User Management
-          </summary>
-          <ul className="p-2 bg-slate-50 rounded-lg z-50">
-            <li>
-              <ActiveLink to="/add-user">
-                <HiOutlineUserAdd /> Add User
-              </ActiveLink>
-            </li>
-            <li>
-              <ActiveLink to="/users">
-                <HiOutlineUsers /> All User
-              </ActiveLink>
-            </li>
-            <li>
-              <ActiveLink to="/invite">
-                <FaPaperPlane /> Invite User
-              </ActiveLink>
-            </li>
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary className="p-2 text-base">
-            <IoFileTrayFullOutline /> Departments
-          </summary>
-          <ul className="p-2 bg-slate-50 rounded-lg z-50">
-            <li>
-              <ActiveLink to="/departments">
-                <IoFileTrayFullOutline /> Departments
-              </ActiveLink>
-            </li>
-            <li>
-              <ActiveLink to="/add-department">
-                <LuFileSymlink />
-                Create Department
-              </ActiveLink>
-            </li>
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary className="p-2 text-base">
-            <HiOutlineUsers /> Employees
-          </summary>
-          <ul className="bg-slate-50 rounded-lg z-50">
-            <li>
-              <ActiveLink to="/employees">
-                <HiOutlineUsers />
-                Employees
-              </ActiveLink>
-            </li>
-            <li>
-              <ActiveLink to="/add-employee">
-                <HiOutlineUserAdd />
-                Add Employee
-              </ActiveLink>
-            </li>
-          </ul>
-        </details>
-      </li>
-      <li className="p-2 text-base">
-        <ActiveLink to="/drag">
-          <TbDragDrop />
-          Drag and Drop
-        </ActiveLink>
-      </li>
-      <li className="p-2 text-base">
-        <ActiveLink to="/widget">
-          <MdOutlineWidgets />
-          Widget
-        </ActiveLink>
-      </li>
-      <li className="p-2 text-base">
-        <ActiveLink to="/profile">
-          <CgProfile />
-          Profile
-        </ActiveLink>
-      </li>
-    </>
-  );
+import CollapNavItems from "./CollapNavItems";
+import SideNavItems from "./SideNavItems";
+import MobileMenu from "./MobileMenu";
 
+const SideNav = ({ isExpanded, setIsExpanded }) => {
+  const [expandedSection, setExpandedSection] = useState(null);
+
+  const toggleExpand = (section = null) => {
+    if (!isExpanded) {
+      setIsExpanded(true);
+      setExpandedSection(section);
+    } else {
+      setIsExpanded(false);
+      setExpandedSection(null);
+    }
+  };
   return (
-    <div className="relative lg:w-full bg-slate-100 lg:h-[800px] drop-shadow-lg rounded-md lg:overflow-y-hidden z-50">
+    <div className="relative lg:w-full bg-slate-100 lg:h-[800px] drop-shadow-lg rounded-md lg:overflow-y-hidden z-50 transition-all ease-in-out duration-500">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -121,12 +47,33 @@ const SideNav = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-slate-100 rounded-box z-50 mt-3 w-[250px] lg:w-full shadow"
           >
-            {menuItems}
+            <MobileMenu/>
           </ul>
         </div>
       </div>
-      <div className="hidden lg:flex">
-        <ul className="menu menu-vertical w-full">{menuItems}</ul>
+      <div className="hidden lg:flex flex-col">
+        <button
+          className={`btn btn-primary px-2 mb-2 text-2xl ${
+            isExpanded ? "w-1/6" : "w-full"
+          } mx-auto`}
+          onClick={() => toggleExpand(null)}
+        >
+          {isExpanded ? <HiOutlineX /> : <HiMenu />}
+        </button>
+        <ul
+          className={`menu menu-vertical w-full ${
+            isExpanded ? "p-2" : "p-0"
+          } transition-all ease-in-out duration-500`}
+        >
+          {isExpanded ? (
+            <SideNavItems
+              isExpanded={isExpanded}
+              expandedSection={expandedSection}
+            />
+          ) : (
+            <CollapNavItems toggleExpand={toggleExpand} />
+          )}
+        </ul>
       </div>
     </div>
   );
