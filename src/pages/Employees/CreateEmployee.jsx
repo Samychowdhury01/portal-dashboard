@@ -15,6 +15,9 @@ const CreateEmployee = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+
+  
   const onSubmit = async (data) => {
     try {
       setIsLoading(true);
@@ -22,6 +25,7 @@ const CreateEmployee = () => {
       if (response.data?.success) {
         showSuccessMessage("You have successfully created a Employee");
         setIsLoading(false);
+        reset();
       }
     } catch (error) {
       if (error.response) {
@@ -70,14 +74,6 @@ const CreateEmployee = () => {
           label="Email"
           error={errors.email}
         />
-        {/* <Input
-          type="text"
-          placeholder="Employee Name"
-          register={register}
-          name="employeeName"
-          label="Employee Name"
-          error={errors.username}
-        /> */}
         <Input
           type="text"
           placeholder="Job Title"
@@ -97,6 +93,7 @@ const CreateEmployee = () => {
             className="select  select-bordered border-gray-300 focus:outline-none w-full"
             {...register("departmentId", { required: true })}
           >
+            <option value="">Select Department</option>
             {departments.map((department) => (
               <option key={department.id} value={department.id}>
                 {`${department.id}(${department.name})`}

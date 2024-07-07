@@ -65,6 +65,7 @@ const UpdateDepartment = () => {
           placeholder="Department Name"
           register={register}
           name="name"
+          defaultValue={data.name}
           label="Department Name"
           error={errors.name}
         />

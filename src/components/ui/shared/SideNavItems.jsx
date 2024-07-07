@@ -14,10 +14,9 @@ const SideNavItems = ({ isExpanded, expandedSection }) => {
   return (
     <>
       <li>
-        <details open={isExpanded && expandedSection ? expandedSection === "user-management" : open}>
+        <details open={expandedSection === "user-management"}>
           <summary className="p-2 text-base">
-            <HiOutlineUserAdd
-            />
+            <HiOutlineUserAdd />
             {isExpanded && "User Management"}
           </summary>
           {isExpanded && (
