@@ -1,11 +1,12 @@
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import useFetchData from "../../../hooks/useFetchData";
-import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import Loader from "../shared/Loader";
 import axiosInstance from "../../../utils/axiosInstance";
+import { useState } from "react";
+import AddDepartmentForm from "./AddDepartmentForm";
 import ActionBtn from "../ActionBtn";
-
+import handleDelete from "../../../utils/handleDelete";
 const DepartmentData = ({ handleCheck, checkedName }) => {
   const {
     isLoading,
@@ -13,50 +14,65 @@ const DepartmentData = ({ handleCheck, checkedName }) => {
     setData,
   } = useFetchData("/departments");
 
-  // handle delete
-  const handleDelete = async (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const response = await axiosInstance.delete(`/departments/${id}`);
-          if (response.data?.success) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-            // Update state to remove the deleted department
-            setData((prevDepartments) =>
-              prevDepartments.filter((department) => department.id !== id)
-            );
-          }
-        } catch (error) {
-          console.error("Error deleting department:", error);
-        }
+  const [addDepartmentShow, setAddDepartmentShow] = useState(false);
+
+  // State to manage editing a specific department
+  const [editingDepartmentId, setEditingDepartmentId] = useState(null);
+  const [editedDepartmentData, setEditedDepartmentData] = useState({});
+
+  // Handle update (modified to handle editing specific department)
+  const handleUpdateDepartment = async (id, updatedData) => {
+    try {
+      const response = await axiosInstance.put(
+        `/departments/${id}`,
+        updatedData
+      );
+      if (response.data?.success) {
+        Swal.fire({
+          title: "Updated!",
+          text: "Department details have been updated successfully.",
+          icon: "success",
+        });
+
+        // Update state with edited data
+        setData((prevDepartments) =>
+          prevDepartments.map((department) =>
+            department.id === id ? updatedData : department
+          )
+        );
+
+        // Reset editing state
+        setEditingDepartmentId(null);
+        setEditedDepartmentData({});
       }
-    });
+    } catch (error) {
+      console.error("Error updating department:", error);
+      // Handle update errors (e.g., display an error message)
+    }
   };
 
-  console.log(checkedName, "from line 47 department data");
+  // Handle edit button click (opens edit form for the specific department)
+  const handleEditClick = (department) => {
+    setEditingDepartmentId(department.id);
+    setEditedDepartmentData({ ...department }); // Copy department data for editing
+  };
+
+  // Handle cancel edit (closes edit form and resets state)
+  const handleCancelEdit = () => {
+    setEditingDepartmentId(null);
+    setEditedDepartmentData({});
+  };
 
   return (
     <>
       {isLoading ? (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex items-center justify-center">
           <Loader />
         </div>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto h-full">
           <table className="table relative z-0">
-            {/* head */}
+            {/* Head */}
             <thead className="bg-slate-100">
               <tr>
                 <th></th>
@@ -64,12 +80,25 @@ const DepartmentData = ({ handleCheck, checkedName }) => {
                 <th>Department Name</th>
                 <th>
                   <ActionBtn>
-                    <button>Add Department</button>
+                    <button onClick={() => setAddDepartmentShow(true)}>
+                      Add Department
+                    </button>
                   </ActionBtn>
                 </th>
               </tr>
             </thead>
             <tbody>
+              {addDepartmentShow && (
+                <tr>
+                  <th></th>
+                  <td colSpan={4}>
+                    <AddDepartmentForm
+                      setShow={setAddDepartmentShow}
+                      setData={setData}
+                    />
+                  </td>
+                </tr>
+              )}
               {departments &&
                 departments.map((department, index) => (
                   <tr key={index}>
@@ -82,15 +111,65 @@ const DepartmentData = ({ handleCheck, checkedName }) => {
                       />
                     </th>
                     <td>{department.id}</td>
-                    <td>{department.name}</td>
-                    <td className="space-x-4">
-                      <Link to={`/`} className="icon-btn">
-                        <FaRegEdit />
-                      </Link>
-                      <button className="icon-btn">
-                        <FaRegTrashAlt />
-                      </button>
-                    </td>
+                    {editingDepartmentId === department.id ? (
+                      <>
+                        <td>
+                          <input
+                            type="text"
+                            defaultValue={department.name} // Pre-fill with existing name
+                            onChange={(e) =>
+                              setEditedDepartmentData({
+                                ...editedDepartmentData,
+                                name: e.target.value,
+                              })
+                            }
+                          />
+                        </td>
+                        <td>
+                          <button
+                            onClick={() =>
+                              handleUpdateDepartment(
+                                department.id,
+                                editedDepartmentData
+                              )
+                            }
+                            className="btn btn-sm btn-primary"
+                          >
+                            Update
+                          </button>
+                          <button
+                            onClick={handleCancelEdit}
+                            className="btn btn-sm btn-secondary ml-2"
+                          >
+                            Cancel
+                          </button>
+                        </td>
+                      </>
+                    ) : (
+                      <>
+                        <td>{department.name}</td>
+                        <td className="flex gap-2">
+                          <button
+                            onClick={() => handleEditClick(department)}
+                            className="icon-btn"
+                          >
+                            <FaRegEdit />
+                          </button>
+                          <button
+                            className="icon-btn"
+                            onClick={() =>
+                              handleDelete(
+                                department.id,
+                                "departments",
+                                setData
+                              )
+                            }
+                          >
+                            <FaRegTrashAlt />
+                          </button>
+                        </td>
+                      </>
+                    )}
                   </tr>
                 ))}
             </tbody>

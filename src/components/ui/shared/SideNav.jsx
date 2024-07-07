@@ -24,7 +24,7 @@ const SideNav = ({ isExpanded, setIsExpanded }) => {
     }
   };
   return (
-    <div className="relative lg:w-full bg-slate-100 lg:h-[800px] drop-shadow-lg rounded-md lg:overflow-y-hidden z-50 transition-all ease-in-out duration-500">
+    <div className="relative lg:w-full bg-slate-100 lg:h-[800px] drop-shadow-lg rounded-md lg:overflow-x-hidden z-50 transition-all ease-in-out duration-500">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

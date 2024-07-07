@@ -6,17 +6,10 @@ import useFetchData from "../../hooks/useFetchData";
 
 const Employees = () => {
   const { isLoading, data: employees, setData } = useFetchData("/employees");
-  const [filteredEmployees, setFilteredEmployees] = useState(employees);
+  const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [checkedName, setCheckedName] = useState(null);
 
-  // const handleCheck = (name) => {
-  //   if (checkedName === name) return; // Do nothing if already checked
-
-  //   setCheckedName(name);
-  //   const filteredData = employees.filter((employee) => employee.department_name === name);
-  //   setFilteredEmployees(filteredData);
-  // };
-
+console.log(employees);
   const handleCheck = (name) => {
     if (checkedName === name) {
       setCheckedName(null);
