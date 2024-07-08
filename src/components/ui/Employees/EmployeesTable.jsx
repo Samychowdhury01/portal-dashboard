@@ -63,7 +63,8 @@ const EmployeesTable = ({ setData, employees }) => {
                 data={employee}
                 key={index}
                 index={index}
-                setEmployees={setData}
+                setEmployees={setData} 
+                departments={departments}
               />
             ))}
         </tbody>
