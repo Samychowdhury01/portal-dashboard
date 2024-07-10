@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import EmployeeRow from "./EmployeeRow";
 import { useState, useEffect } from "react";
@@ -8,7 +9,6 @@ import { showErrorMessage } from "../../../utils/showMessages";
 import ActionBtn from "../ActionBtn";
 
 const EmployeesTable = ({ setData, employees }) => {
-  console.log(employees, 'employees data from employees');
   const [addEmployeeToggle, setAddEmployeeToggle] = useState(false);
   const { data: departments } = useFetchData("/departments");
 
@@ -52,7 +52,6 @@ const EmployeesTable = ({ setData, employees }) => {
                 <EmployeeForm
                   setAddEmployeeToggle={setAddEmployeeToggle}
                   fetchEmployees={fetchEmployees}
-                  departments={departments}
                 />
               </td>
             </tr>

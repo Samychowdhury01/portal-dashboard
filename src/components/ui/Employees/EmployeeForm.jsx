@@ -7,13 +7,9 @@ import {
 } from "../../../utils/showMessages";
 import Input from "../Input";
 import Loader from "../shared/Loader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const EmployeeForm = ({
-  setAddEmployeeToggle,
-  fetchEmployees,
-  departments,
-}) => {
+const EmployeeForm = ({ setAddEmployeeToggle, fetchEmployees }) => {
   const {
     register,
     reset,
@@ -21,6 +17,21 @@ const EmployeeForm = ({
     formState: { errors },
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const [departments, setDepartments] = useState([]);
+
+  const fetchDepartmentData = async () => {
+    try {
+      const response = await axiosInstance.get("/departments");
+      if (response.data.success) {
+        setDepartments(response.data.data);
+      }
+    } catch (error) {
+      showErrorMessage(error.response.data.message);
+    }
+  };
+  useEffect(() => {
+    fetchDepartmentData();
+  }, []);
 
   const onSubmit = async (data) => {
     try {

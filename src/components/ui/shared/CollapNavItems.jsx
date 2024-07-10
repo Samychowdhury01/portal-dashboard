@@ -1,16 +1,12 @@
-import { FaPaperPlane } from "react-icons/fa";
 import { HiOutlineUserAdd, HiOutlineUsers } from "react-icons/hi";
 import { IoFileTrayFullOutline } from "react-icons/io5";
-import { LuFileSymlink } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineWidgets } from "react-icons/md";
 import { TbDragDrop } from "react-icons/tb";
-import ActiveLink from "./ActiveLink";
 
-
-const CollapNavItems = ({toggleExpand}) => {
-    return (
-            <>
+const CollapNavItems = ({ toggleExpand }) => {
+  return (
+    <>
       <li
         className="p-2 text-base"
         onClick={() => toggleExpand("user-management")}
@@ -45,11 +41,11 @@ const CollapNavItems = ({toggleExpand}) => {
         </p>
       </li>
     </>
-    );
+  );
 };
 
 export default CollapNavItems;
 
-  // const collapsedNav = (
+// const collapsedNav = (
 
-  // );
+// );
