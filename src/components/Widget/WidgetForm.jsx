@@ -1,3 +1,6 @@
+import DepartmentSelect from "../ui/shared/DepartmentSelect";
+import WidgetFormInput from "./WidgetFormInput";
+
 const WidgetForm = ({
   setOpenForm,
   register,
@@ -12,10 +15,10 @@ const WidgetForm = ({
     setOpenForm(false);
   };
 
-  const handleExpand = (e) =>{
-    e.preventDefault()
-    setExpand(!expand)
-  }
+  const handleExpand = (e) => {
+    e.preventDefault();
+    setExpand(!expand);
+  };
   return (
     <div
       className={`p-3 border-2 border-primary transition-all ease-in-out duration-300 rounded-lg shadow-lg ${
@@ -33,68 +36,33 @@ const WidgetForm = ({
       </div>
       {/* form */}
       <form>
-        <div>
-          <label className=" text-gray-700 text-base font-medium m-2">
-            Username
-          </label>
-          <input
-            className="input input-bordered"
-            type="text"
-            id="username"
-            placeholder="username"
-            {...register("username", { required: "Username is required" })}
-          />
-          {errors.username && (
-            <p className="text-red-500">{errors.username.message}</p>
-          )}
-        </div>
+        <WidgetFormInput
+          name="username"
+          register={register}
+          placeholder="username"
+          label="Username"
+          error={errors.username}
+        />
 
         <div className="flex items-center gap-4 my-5">
+          <WidgetFormInput
+            name="jobTitle"
+            placeholder="jobTitle"
+            label="Job Title"
+            register={register}
+            error={errors.jobTitle}
+          />
+
+          <WidgetFormInput
+            name="email"
+            placeholder="Email"
+            label="Email"
+            register={register}
+            error={errors.email}
+          />
+
           <div>
-            <label className="block text-gray-700 text-base font-medium mb-2">
-              Job Title
-            </label>
-            <input
-              className="input input-bordered"
-              type="text"
-              placeholder="jobTitle"
-              {...register("jobTitle", { required: "Job Title is required" })}
-              id="jobTitle"
-            />
-            {errors.jobTitle && (
-              <p className="text-red-500">{errors.jobTitle.message}</p>
-            )}
-          </div>
-          <div>
-            <label className="block text-gray-700 text-base font-medium mb-2">
-              Email
-            </label>
-            <input
-              className="input input-bordered"
-              type="email"
-              placeholder="email"
-              {...register("email", { required: "Email is required" })}
-              id="email"
-            />
-            {errors.email && (
-              <p className="text-red-500">{errors.email.message}</p>
-            )}
-          </div>
-          <div>
-            <label className="block text-gray-700 text-base font-medium mb-2">
-              Department
-            </label>
-            <select
-              className="input input-bordered"
-              {...register("departments", {
-                required: "Department is required",
-              })}
-            >
-              <option value="HR">HR</option>
-            </select>
-            {errors.departments && (
-              <p className="text-red-500">{errors.departments.message}</p>
-            )}
+            <DepartmentSelect register={register} error={errors.departmentId} />
           </div>
         </div>
       </form>

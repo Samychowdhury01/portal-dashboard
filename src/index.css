@@ -33,8 +33,11 @@
   .btn-outline-primary {
     @apply border-primary text-primary;
   }
-  .icon-btn{
-    @apply btn btn-primary bg-opacity-20 text-black hover:text-white transition-all ease-in-out duration-300
+  .icon-btn {
+    @apply btn btn-primary bg-opacity-20 text-black hover:text-white transition-all ease-in-out duration-300;
+  }
+  .label-text {
+    @apply block text-gray-700 text-base font-medium mb-2;
   }
 }
 

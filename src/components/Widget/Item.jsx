@@ -1,24 +1,32 @@
+/* eslint-disable no-unused-vars */
 import { useSortable } from "@dnd-kit/sortable";
 import { useEffect } from "react";
 import { CSS } from "@dnd-kit/utilities";
+import WidgetFormInput from "./WidgetFormInput";
+import DepartmentSelect from "../ui/shared/DepartmentSelect";
 
 const Item = ({ item, setFormData, formData }) => {
-  const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
-    useSortable({
-      id: item.id,
-      data: {
-        type: "item",
-        item,
-      },
-    });
+  const {
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: item.id,
+    data: {
+      type: "item",
+      item,
+    },
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition: "transform ease-in-out, opacity 0.15s ease-in-out", // Adjust as needed
+    transition: "transform ease-in-out", // Adjust as needed
     touchAction: "none",
     zIndex: isDragging ? 100 : 0,
     opacity: isDragging ? 0.8 : 1,
-    
   };
   // to delete the input box
   // const handleDelete = () => {
@@ -52,7 +60,11 @@ const Item = ({ item, setFormData, formData }) => {
       style={style}
       {...listeners}
       {...attributes}
-      className={`p-3 border-2 border-primary transition-all ease-in-out duration-300 rounded-lg shadow-lg mb-2 bg-primary bg-opacity-20 cursor-grab`} //${expand ? "w-full" : "w-[800px]"}
+      className={`p-3 border-2 border-primary transition-all ease-in-out duration-300 rounded-lg shadow-lg mb-2 bg-primary  cursor-grab ${
+        isDragging
+          ? "bg-opacity-100 shadow-2xl shadow-primary"
+          : "bg-opacity-20"
+      }`} //${expand ? "w-full" : "w-[800px]"}
     >
       {/* button div */}
       {/* <div className="flex items-center justify-end gap-5">
@@ -63,65 +75,49 @@ const Item = ({ item, setFormData, formData }) => {
           Delete
         </button>
       </div> */}
+      
       {/* form */}
       <form>
         <div>
-          <label className="text-gray-700 text-base font-medium m-2">
-            Username
-          </label>
-          <input
-            className="input input-bordered"
-            type="text"
-            id="username"
+          <WidgetFormInput
             name="username"
             defaultValue={item.username}
             onChange={handleChange}
             placeholder="username"
+            isDragging={isDragging}
+            isItemInput={true}
+            label="Username"
           />
         </div>
 
         <div className="flex items-center gap-4 my-5">
+          <WidgetFormInput
+            defaultValue={item.jobTitle}
+            onChange={handleChange}
+            name="jobTitle"
+            placeholder="jobTitle"
+            isDragging={isDragging}
+            isItemInput={true}
+            label="Job Title"
+          />
+
+          <WidgetFormInput
+            defaultValue={item.email}
+            onChange={handleChange}
+            name="email"
+            placeholder="email"
+            isDragging={isDragging}
+            isItemInput={true}
+            label="Email"
+          />
+
           <div>
-            <label className="block text-gray-700 text-base font-medium mb-2">
-              Job Title
-            </label>
-            <input
-              className="input input-bordered"
-              type="text"
-              defaultValue={item.jobTitle}
+            <DepartmentSelect
+              isItemInput={true}
+              isDragging={isDragging}
               onChange={handleChange}
-              name="jobTitle"
-              placeholder="jobTitle"
-              id="jobTitle"
+              defaultValue={item.department}
             />
-          </div>
-          <div>
-            <label className="block text-gray-700 text-base font-medium mb-2">
-              Email
-            </label>
-            <input
-              className="input input-bordered"
-              type="email"
-              defaultValue={item.email}
-              onChange={handleChange}
-              name="email"
-              placeholder="email"
-              id="email"
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700 text-base font-medium mb-2">
-              Department
-            </label>
-            <select
-              onChange={handleChange}
-              className="input input-bordered"
-              name="department"
-              defaultValue={item.department || "HR"}
-            >
-              <option value="HR">HR</option>
-              {/* Add other department options here if needed */}
-            </select>
           </div>
         </div>
       </form>
@@ -130,4 +126,3 @@ const Item = ({ item, setFormData, formData }) => {
 };
 
 export default Item;
-
