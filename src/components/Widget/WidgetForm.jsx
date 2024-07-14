@@ -4,38 +4,40 @@ import WidgetFormInput from "./WidgetFormInput";
 const WidgetForm = ({
   setOpenForm,
   register,
-  expand,
-  setExpand,
+  formExpand,
   errors,
   reset,
+  setFormExpand,
 }) => {
   // to delete the input box
-  const handleDelete = () => {
+  const handleDelete = (e) => {
+    e.preventDefault();
     reset();
     setOpenForm(false);
   };
 
+  // handle expand
   const handleExpand = (e) => {
     e.preventDefault();
-    setExpand(!expand);
+    setFormExpand(!formExpand);
   };
   return (
     <div
       className={`p-3 border-2 border-primary transition-all ease-in-out duration-300 rounded-lg shadow-lg ${
-        expand ? "w-full" : "w-[800px]"
+        formExpand ? "w-full" : "w-[800px]"
       }`}
     >
-      {/* button div */}
-      <div className="flex items-center justify-end gap-5">
-        <button onClick={handleExpand} className="btn btn-primary">
-          Expand
-        </button>
-        <button onClick={handleDelete} className="btn btn-secondary">
-          Delete
-        </button>
-      </div>
       {/* form */}
       <form>
+        {/* button div */}
+        <div className="flex items-center justify-end gap-5">
+          <button onClick={handleExpand} className="btn btn-primary">
+            Expand
+          </button>
+          <button onClick={handleDelete} className="btn btn-secondary">
+            Delete
+          </button>
+        </div>
         <WidgetFormInput
           name="username"
           register={register}

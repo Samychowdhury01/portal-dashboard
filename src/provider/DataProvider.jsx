@@ -4,16 +4,24 @@ import useFetchData from "../hooks/useFetchData";
 export const DataContext = createContext(null);
 const DataProvider = ({ children }) => {
   const {
-    isDepartmentsLoading,
+    isLoading: isDepartmentsLoading,
     data: departments,
-    setDepartments,
+    setData: setDepartments,
   } = useFetchData("/departments");
 
-  console.log(departments);
+  const {
+    isLoading: isDropItemsLoading,
+    data: dropItems,
+    setData: setDropItems,
+  } = useFetchData("/items");
+
   const data = {
     departments,
     setDepartments,
     isDepartmentsLoading,
+    dropItems,
+    setDropItems,
+    isDropItemsLoading,
   };
   return (
     !isDepartmentsLoading && (

@@ -10,6 +10,12 @@ const DepartmentSelect = ({
 }) => {
   const { departments, isDepartmentLoading } = useContext(DataContext);
 
+  // to get te department
+  const filteredDepartment = departments.find(
+    (department) => department.id === defaultValue
+  );
+
+  
   return (
     <div>
       <label className={`label-text ${isDragging && "text-white"}`}>
@@ -18,10 +24,11 @@ const DepartmentSelect = ({
       {isItemInput ? (
         <select
           onChange={handleChange}
+          name="department_id"
           className="select select-bordered border-gray-300 focus:outline-none"
           required
         >
-          <option value={defaultValue}>{defaultValue}</option>
+          <option value={defaultValue}>{filteredDepartment?.name}</option>
           {!isDepartmentLoading &&
             departments?.map((dept) => (
               <option key={dept.id} value={dept.id}>

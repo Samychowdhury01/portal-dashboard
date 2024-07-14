@@ -1,12 +1,14 @@
 import Loader from "../../components/ui/shared/Loader";
 import DepartmentRow from "../../components/ui/Departments/DepartmentRow";
-import useFetchData from "../../hooks/useFetchData";
+import { useContext } from "react";
+import { DataContext } from "../../provider/DataProvider";
 
 const Departments = () => {
-  const { isLoading, data: departments, setData } = useFetchData('/departments')
+  const { isDepartmentsLoading, departments, setDepartments } =
+    useContext(DataContext);
   return (
     <>
-      {isLoading ? (
+      {isDepartmentsLoading ? (
         <div className="flex items-center justify-center h-screen">
           :
           <Loader />
@@ -27,7 +29,12 @@ const Departments = () => {
             <tbody>
               {departments &&
                 departments.map((department, index) => (
-                  <DepartmentRow data={department} key={index} index={index} setDepartments={setData}/>
+                  <DepartmentRow
+                    data={department}
+                    key={index}
+                    index={index}
+                    setDepartments={setDepartments}
+                  />
                 ))}
             </tbody>
           </table>

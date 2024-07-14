@@ -53,27 +53,31 @@ const WidgetItems = ({ items, isItemsLoading }) => {
         showErrorMessage(error.response.data.message);
         reset();
       }
-      return;
-    } else {
-      try {
-        const response = await axiosInstance.put("/items", updatedItems);
-        if (response.data.success) {
-          showSuccessMessage("Items updated successfully");
-          reset();
-          setOpenForm(false);
-        }
-      } catch (error) {
-        console.log(error);
-        showErrorMessage(error.response.data.message);
-        reset();
-      }
     }
+    console.log('out side of the objectkeys if block');
+
+    // update existing data
+    try {
+      const response = await axiosInstance.put("/items", updatedItems);
+      if (response.data.success) {
+        console.log('try block after if', response.data.data);
+        showSuccessMessage("Items updated successfully");
+        reset();
+        setOpenForm(false);
+      }
+    } catch (error) {
+      console.log(error);
+      showErrorMessage(error.response.data.message);
+      reset();
+    }
+
     // Send new order to the backend
     try {
       await axiosInstance.put("/items/order", updatedItems);
     } catch (error) {
       console.error("Failed to update order:", error);
     }
+    console.log({data, updatedItems});
   };
 
   const handleDragEnd = async (event) => {
@@ -122,6 +126,7 @@ const WidgetItems = ({ items, isItemsLoading }) => {
                 key={item.id}
                 item={item}
                 handleInputChange={handleInputChange}
+                setUpdatedItems={setUpdatedItems}
               />
             ))}
           </SortableContext>

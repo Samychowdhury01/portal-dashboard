@@ -20,6 +20,7 @@ const WidgetFormInput = ({
           type="text"
           placeholder={placeholder}
           id={name}
+          name={name}
           onChange={handleChange}
           defaultValue={defaultValue}
         />
@@ -30,7 +31,6 @@ const WidgetFormInput = ({
           placeholder={placeholder}
           {...register(name, { required: `${label} is required` })}
           id={name}
-          defaultValue={defaultValue}
         />
       )}
       {error && <p className="text-red-500">{error.message}</p>}
