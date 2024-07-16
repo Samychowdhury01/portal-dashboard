@@ -38,7 +38,7 @@ const DepartmentSelect = ({
         </select>
       ) : (
         <select
-          {...register("departmentId")}
+          {...register("department_id")}
           className="select select-bordered border-gray-300 focus:outline-none"
         >
           <option value={defaultValue || ""}>{defaultValue || ""}</option>

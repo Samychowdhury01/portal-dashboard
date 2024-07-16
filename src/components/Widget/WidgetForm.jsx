@@ -48,11 +48,11 @@ const WidgetForm = ({
 
         <div className="flex items-center gap-4 my-5">
           <WidgetFormInput
-            name="jobTitle"
+            name="job_title"
             placeholder="jobTitle"
             label="Job Title"
             register={register}
-            error={errors.jobTitle}
+            error={errors.job_title}
           />
 
           <WidgetFormInput

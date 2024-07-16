@@ -44,12 +44,14 @@ const WidgetItems = ({ items, isItemsLoading }) => {
     if (Object.keys(data).length !== 0) {
       const itemOrder = updatedItems.length + 1;
       const item = { ...data, item_order: itemOrder, expanded: formExpand };
+
       try {
         const response = await axiosInstance.post("/items", item);
         if (response.data.success) {
           showSuccessMessage("New item added successfully");
           reset();
           setOpenForm(false);
+          setUpdatedItems((prevItems) => [...prevItems, response.data.data]);
         }
       } catch (error) {
         showErrorMessage(error.response.data.message);
@@ -58,28 +60,35 @@ const WidgetItems = ({ items, isItemsLoading }) => {
       }
     }
 
-    try {
-      const extractIdFromItems = updatedItems.filter(async (item) => {
-        const id = String(item?.id);
-        const is = id.split("-");
-        console.log({ id }, { is });
-        if (id.startsWith("new-")) {
-          const { id, ...restData } = item;
-          console.log(item);
-          try {
-            const response = await axiosInstance.post("/items", item);
-            console.log(response.data);
-            if (response.data.success) {
-              reset();
-              setAddNewForm(false);
-            }
-          } catch (error) {
-            showErrorMessage(error.response.data.message);
-            reset();
-          }
+    // Filter and handle new items (with "new-" IDs)
+    const newItems = updatedItems.filter((item) =>
+      String(item.id).startsWith("new-")
+    );
+
+    for (const newItem of newItems) {
+      try {
+        const response = await axiosInstance.post("/items", newItem);
+
+        if (response.data.success) {
+          // Replace the new item with the item from the response
+          setUpdatedItems((prevItems) =>
+            prevItems.map((item) =>
+              item.id === newItem.id ? response.data.data : item
+            )
+          );
         }
-      });
-      const response = await axiosInstance.put("/items", updatedItems);
+      } catch (error) {
+        showErrorMessage(error.response.data.message);
+      }
+    }
+
+    // Handle updating existing items
+    const existingItems = updatedItems.filter(
+      (item) => !String(item.id).startsWith("new-")
+    );
+
+    try {
+      const response = await axiosInstance.put("/items", existingItems);
       if (response.data.success) {
         showSuccessMessage("Items updated successfully");
         reset();
@@ -90,6 +99,7 @@ const WidgetItems = ({ items, isItemsLoading }) => {
       reset();
     }
 
+    // Update item order
     try {
       await axiosInstance.put("/items/order", updatedItems);
     } catch (error) {
@@ -102,15 +112,24 @@ const WidgetItems = ({ items, isItemsLoading }) => {
     const { active, over } = event;
     if (!over) return;
 
+    // Check if there's any incomplete new item
+    const incompleteNewItem = updatedItems.find(
+      (item) =>
+        String(item.id).startsWith("new-") &&
+        (!item.username ||
+          !item.job_title ||
+          !item.email ||
+          !item.department_id)
+    );
+
     if (active.id === "username" && over.id !== "username") {
-      if (addNewForm || openForm) {
+      if (openForm || incompleteNewItem) {
         Swal.fire({
           icon: "error",
           title: "Please fill up the form first",
         });
         return;
       }
-
       setUpdatedItems((prevItems) => {
         const newIndex = prevItems.findIndex((item) => item.id === over.id);
         const newItem = {
@@ -143,7 +162,16 @@ const WidgetItems = ({ items, isItemsLoading }) => {
 
   // handler for add button
   const handleAdd = () => {
-    if (addNewForm) {
+    const incompleteNewItem = updatedItems.find(
+      (item) =>
+        String(item.id).startsWith("new-") &&
+        (!item.username ||
+          !item.job_title ||
+          !item.email ||
+          !item.department_id)
+    );
+
+    if (addNewForm || incompleteNewItem) {
       Swal.fire({
         icon: "error",
         title: "Please fill up the form first",
@@ -153,6 +181,7 @@ const WidgetItems = ({ items, isItemsLoading }) => {
       setOpenForm(true);
     }
   };
+
   return (
     <div>
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
@@ -162,25 +191,7 @@ const WidgetItems = ({ items, isItemsLoading }) => {
           </div>
           <div>
             <div>
-              {/* <button
-                onClick={() => {
-                  if (addNewForm) {
-                    Swal.fire({
-                      icon: "error",
-                      title: "Please fill up the form first",
-                    });
-                    return;
-                  }
-                  setAddNewForm(true);
-                }}
-                className="btn btn-primary my-5 mr-5"
-              >
-                Add
-              </button> */}
-              <button
-                onClick={handleAdd}
-                className="btn btn-primary my-5 mr-5"
-              >
+              <button onClick={handleAdd} className="btn btn-primary my-5 mr-5">
                 Add
               </button>
 
