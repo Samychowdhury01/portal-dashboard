@@ -13,6 +13,9 @@ import axiosInstance from "../../utils/axiosInstance";
 import { showErrorMessage, showSuccessMessage } from "../../utils/showMessages";
 import SideForm from "./SideForm";
 import Swal from "sweetalert2";
+import { FaRegSave } from "react-icons/fa";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { IoAdd } from "react-icons/io5";
 
 const WidgetItems = ({ items, isItemsLoading }) => {
   const [openForm, setOpenForm] = useState(false);
@@ -154,9 +157,10 @@ const WidgetItems = ({ items, isItemsLoading }) => {
       const oldIndex = updatedItems.findIndex((item) => item.id === active.id);
       const newIndex = updatedItems.findIndex((item) => item.id === over.id);
       const newOrder = arrayMove(updatedItems, oldIndex, newIndex);
-      setUpdatedItems(
-        newOrder.map((item, index) => ({ ...item, item_order: index + 1 }))
-      );
+      // setUpdatedItems(
+      //   newOrder.map((item, index) => ({ ...item, item_order: index + 1 }))
+      // );
+      setUpdatedItems(newOrder);
     }
   };
 
@@ -187,19 +191,19 @@ const WidgetItems = ({ items, isItemsLoading }) => {
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <div className="flex gap-10 justify-around">
           <div className="mt-10 h-[300px]">
-            <SideForm />
+            <SideForm  />
           </div>
           <div>
-            <div>
-              <button onClick={handleAdd} className="btn btn-primary my-5 mr-5">
-                Add
+            <div className="flex items-center gap-3 mb-5">
+              <button onClick={handleAdd} className="btn btn-circle border-primary text-gray-700 hover:btn-primary hover:-opacity-10">
+              <IoAdd  className="text-xl"/>
               </button>
 
               <button
                 onClick={handleSubmit(onSubmit)}
-                className="btn btn-primary"
+                className="btn btn-circle border-primary text-gray-700 hover:btn-primary hover:-opacity-10"
               >
-                Save
+                <FaRegSave className="text-xl"/>
               </button>
             </div>
 

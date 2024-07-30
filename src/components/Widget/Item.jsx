@@ -3,6 +3,11 @@ import { CSS } from "@dnd-kit/utilities";
 import WidgetFormInput from "./WidgetFormInput";
 import DepartmentSelect from "../ui/shared/DepartmentSelect";
 import handleDelete from "../../utils/handleDelete";
+import {
+  FaExpandAlt,
+  FaRegTrashAlt,
+  FaRegWindowMinimize,
+} from "react-icons/fa";
 
 const Item = ({ item, handleInputChange, setUpdatedItems, setAddNewForm }) => {
   const {
@@ -66,12 +71,15 @@ const Item = ({ item, handleInputChange, setUpdatedItems, setAddNewForm }) => {
       <div className="flex items-center justify-end gap-5">
         <button
           onClick={() => handleExpand(item?.id)}
-          className="btn btn-primary"
+          className="btn  border-primary text-gray-700 hover:btn-primary hover:-opacity-10"
         >
-          Expand
+          {item.expanded ? <FaRegWindowMinimize /> : <FaExpandAlt />}
         </button>
-        <button onClick={handleDeleteClick} className="btn btn-secondary">
-          Delete
+        <button
+          onClick={handleDeleteClick}
+          className="btn border-primary text-gray-700 hover:btn-primary hover:-opacity-10"
+        >
+          <FaRegTrashAlt />
         </button>
       </div>
 
