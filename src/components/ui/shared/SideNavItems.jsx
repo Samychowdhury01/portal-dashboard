@@ -86,7 +86,7 @@ const SideNavItems = ({ isExpanded, expandedSection }) => {
         </details>
       </li>
       <li className="p-2 text-base">
-        <ActiveLink to="/drag">
+        <ActiveLink to="/drop-item">
           <TbDragDrop />
           {isExpanded && "Drag and Drop"}
         </ActiveLink>

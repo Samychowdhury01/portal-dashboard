@@ -11,6 +11,7 @@ import CreateEmployee from "../pages/Employees/CreateEmployee";
 import PrivateRoute from "./PrivateRoute";
 import Login from "../pages/Login/Login";
 import UpdateDepartment from "../pages/Department/UpdateDepartment";
+import DropItem from "../pages/DropItem/DropItem";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "/employees",
         element: <Employees />,
+      },
+      {
+        path: "/drop-item",
+        element: <DropItem />,
       },
     ],
   },
