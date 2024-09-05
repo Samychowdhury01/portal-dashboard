@@ -9,7 +9,7 @@ const Employees = () => {
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [checkedName, setCheckedName] = useState(null);
 
-console.log(employees);
+
   const handleCheck = (name) => {
     if (checkedName === name) {
       setCheckedName(null);

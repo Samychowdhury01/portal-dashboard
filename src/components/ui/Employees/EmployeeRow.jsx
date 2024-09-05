@@ -8,7 +8,7 @@ import { useState } from "react";
 const EmployeeRow = ({ data, index, setEmployees, departments }) => {
   const [documentId, setDocumentId] = useState(null);
   const [updateData, setUpdateData] = useState({});
-
+  console.log(updateData);
   // handle delete
   const handleDelete = (id) => {
     Swal.fire({
@@ -41,9 +41,11 @@ const EmployeeRow = ({ data, index, setEmployees, departments }) => {
     });
   };
   // Handle update (modified to handle editing specific department)
-  const handleUpdateEmployee = async (id, updatedData) => {
+  const handleUpdateEmployee = async (id, data) => {
+    console.log(data);
     try {
-      const { full_name, ...restData } = updateData;
+      const { full_name, department_name, ...restData } = data;
+
       const response = await axiosInstance.put(`/employees/${id}`, restData);
       if (response.data?.success) {
         Swal.fire({
@@ -55,7 +57,7 @@ const EmployeeRow = ({ data, index, setEmployees, departments }) => {
         // Update state with edited data
         setEmployees((prevEmployees) =>
           prevEmployees.map((employee) =>
-            employee.id === id ? restData : employee
+            employee.id === id ? data : employee
           )
         );
 
@@ -79,6 +81,20 @@ const EmployeeRow = ({ data, index, setEmployees, departments }) => {
   const handleCancelEdit = () => {
     setDocumentId(null);
     setUpdateData({});
+  };
+
+  // handle select
+  const handleSelect = (e) => {
+    const selectedDepartmentId = parseInt(e.target.value);
+    const selectedDepartmentName = departments.find(
+      (department) => department.id === selectedDepartmentId
+    )?.name;
+
+    setUpdateData({
+      ...updateData,
+      department_id: selectedDepartmentId,
+      department_name: selectedDepartmentName, // Set department_name here
+    });
   };
 
   return (
@@ -138,17 +154,17 @@ const EmployeeRow = ({ data, index, setEmployees, departments }) => {
 
             <td>
               <div className="mb-4">
-                <select className="select  select-bordered border-gray-300 focus:outline-none w-full">
+                <select
+                  className="select select-bordered border-gray-300 focus:outline-none w-full"
+                  onChange={handleSelect}
+                  defaultValue={data.department_id}
+                >
                   <option value={data.department_id}>
                     {data.department_name}
                   </option>
                   {departments &&
                     departments.map((department) => (
-                      <option
-                        onChange={(e) => e.target.value}
-                        key={department.id}
-                        value={department.id}
-                      >
+                      <option key={department.id} value={department.id}>
                         {`${department.id}(${department.name})`}
                       </option>
                     ))}

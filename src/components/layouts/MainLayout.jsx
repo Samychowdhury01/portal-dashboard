@@ -4,7 +4,6 @@ import Container from "../ui/Container";
 import SideNav from "../ui/shared/SideNav";
 import { useState } from "react";
 import TopNav from "../ui/shared/TopNav";
-import Widget from "../Widget/Widget";
 
 
 const MainLayout = () => {
@@ -20,8 +19,7 @@ const MainLayout = () => {
           <SideNav isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
         </div>
         <div className="lg:col-span-10 w-full lg:w-[1220px] mx-auto">
-          {/* <Outlet /> */}
-          <Widget/>
+          <Outlet />
         </div>
       </div>
     </Container>

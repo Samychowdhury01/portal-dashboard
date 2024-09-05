@@ -29,7 +29,7 @@ const TopNav = () => {
         </ActiveLink>
       </li>
       <li>
-        <ActiveLink to="/--">
+        <ActiveLink to="/message">
           <MdEmail className="text-2xl" />
         </ActiveLink>
       </li>

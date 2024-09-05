@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-// SideNav.js
+
 
 import { FaPaperPlane } from "react-icons/fa";
 import { HiOutlineUserAdd, HiOutlineUsers } from "react-icons/hi";

@@ -64,15 +64,15 @@ const EmployeeForm = ({ setAddEmployeeToggle, fetchEmployees }) => {
         type="text"
         placeholder="First Name"
         register={register}
-        name="firstName"
-        error={errors.firstName}
+        name="first_name"
+        error={errors.first_name}
       />
       <Input
         type="text"
         placeholder="Last Name"
         register={register}
-        name="lastName"
-        error={errors.lastName}
+        name="last_name"
+        error={errors.last_name}
       />
       <Input
         type="email"
@@ -85,11 +85,11 @@ const EmployeeForm = ({ setAddEmployeeToggle, fetchEmployees }) => {
         type="text"
         placeholder="Job Title"
         register={register}
-        name="jobTitle"
-        error={errors.jobTitle}
+        name="job_title"
+        error={errors.job_title}
       />
       <select
-        {...register("departmentId")}
+        {...register("department_id")}
         className="select select-bordered border-gray-300 focus:outline-none"
       >
         <option value="">Select Department</option>

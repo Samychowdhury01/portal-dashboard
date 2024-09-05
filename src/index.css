@@ -39,7 +39,9 @@
   .label-text {
     @apply block text-gray-700 text-base font-medium mb-2;
   }
- 
+  .message-menu {
+    @apply bg-primary bg-opacity-80 hover:bg-primary text-lg text-white font-medium p-2;
+  }
 }
 
 /* In your styles.css or a relevant CSS file */

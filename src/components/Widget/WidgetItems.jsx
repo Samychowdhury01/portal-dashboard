@@ -44,6 +44,7 @@ const WidgetItems = ({ items, isItemsLoading }) => {
 
   // handler for save and update data
   const onSubmit = async (data) => {
+    console.log(data);
     if (Object.keys(data).length !== 0) {
       const itemOrder = updatedItems.length + 1;
       const item = { ...data, item_order: itemOrder, expanded: formExpand };
