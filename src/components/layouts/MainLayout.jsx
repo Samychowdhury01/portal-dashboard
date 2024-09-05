@@ -20,6 +20,10 @@ const MainLayout = () => {
         </div>
         <div className="lg:col-span-10 w-full lg:w-[1220px] mx-auto">
           <Outlet />
+<<<<<<< HEAD
+=======
+          
+>>>>>>> 1d59ae0597e0fe36131611dac5bdc42c8d8c9db6
         </div>
       </div>
     </Container>

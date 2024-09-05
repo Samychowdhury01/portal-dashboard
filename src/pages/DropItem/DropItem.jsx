@@ -6,6 +6,7 @@ import WidgetItems from "../../components/Widget/WidgetItems";
 const DropItem = () => {
   const { setDropItems, dropItems, isDropItemsLoading } =
     useContext(DataContext);
+  console.log(dropItems, "from widget page");
   return (
     <div>
       <h1>Widgets</h1>
@@ -16,7 +17,6 @@ const DropItem = () => {
           items={dropItems}
           setItems={setDropItems}
           isItemsLoading={isDropItemsLoading}
-          
         />
       )}
     </div>

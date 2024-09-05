@@ -11,7 +11,10 @@ import CreateEmployee from "../pages/Employees/CreateEmployee";
 import PrivateRoute from "./PrivateRoute";
 import Login from "../pages/Login/Login";
 import UpdateDepartment from "../pages/Department/UpdateDepartment";
+<<<<<<< HEAD
 import Message from "../pages/Message/Message";
+=======
+>>>>>>> 1d59ae0597e0fe36131611dac5bdc42c8d8c9db6
 import DropItem from "../pages/DropItem/DropItem";
 
 const router = createBrowserRouter([
@@ -70,6 +73,7 @@ const router = createBrowserRouter([
         element: <Employees />,
       },
       {
+<<<<<<< HEAD
         path: "/drag",
         element: <DropItem />,
       },
@@ -77,6 +81,11 @@ const router = createBrowserRouter([
         path: "/message",
         element: <Message />,
       },
+=======
+        path: "/drop-item",
+        element: <DropItem />,
+      },
+>>>>>>> 1d59ae0597e0fe36131611dac5bdc42c8d8c9db6
     ],
   },
   {
